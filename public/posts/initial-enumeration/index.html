@@ -1,0 +1,599 @@
+<!doctype html>
+<html
+  lang="en-us"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<title>
+  Initial Enumeration | chr15hax
+</title>
+ 
+<link rel="canonical" href="http://localhost:1313/posts/initial-enumeration/" />
+
+
+<meta property="og:title" content="Initial Enumeration" />
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta property="og:url" content="http://localhost:1313/posts/initial-enumeration/" />
+ 
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Initial Enumeration" />
+      
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Initial Enumeration",
+    "url": "http:\/\/localhost:1313\/posts\/initial-enumeration\/",
+    "datePublished": "2026-11-13T08:03:27-08:00",
+    "dateModified": "2026-11-13T08:03:27-08:00",
+    "author": {
+      "@type": "Person",
+      "name": "Chris"
+    }
+  }
+</script>
+ <link rel="apple-touch-icon" sizes="57x57" href="/favicon_io/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicon_io/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicon_io/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicon_io/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicon_io/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicon_io/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicon_io/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicon_io/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/favicon_io/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon_io/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/favicon_io/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/favicon_io/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+ 
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/custom.css">
+
+
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <header role="banner"><nav class="path-nav" aria-label="Breadcrumb">
+  <ol>
+    
+  
+    
+  
+    
+  
+  <li>
+    /
+    <a href="/">chr15hax</a>
+    /
+  </li>
+
+  
+  <li>
+    
+    <a href="/posts/">Posts</a>
+    /
+  </li>
+
+  
+  <li class="current">
+    
+    <a href="/posts/initial-enumeration/">Initial Enumeration</a>
+    
+  </li>
+
+  </ol>
+</nav>
+
+
+
+</header>
+    <main id="main-content" role="main">
+  <h1>Initial Enumeration</h1>
+  
+
+
+  
+  
+  
+  
+    <details class="toc" open>
+      <summary class="toc-title">Table of contents</summary>
+      <nav class="toc-content">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#service-enumeration">Service Enumeration</a>
+      <ul>
+        <li><a href="#nmap-single-target">Nmap, single target</a></li>
+        <li><a href="#nmap-multiple-targets">Nmap, multiple targets</a></li>
+        <li><a href="#saving-output-to-file">Saving output to file</a></li>
+        <li><a href="#extra-info">Extra info</a></li>
+        <li><a href="#found-nothing">Found Nothing</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+    </details>
+  
+
+   
+   
+
+<h1 id="initial-enumeration">
+  Initial Enumeration
+</h1>
+<hr>
+
+
+<h2 id="service-enumeration">
+  Service Enumeration
+</h2>
+
+
+<h3 id="nmap-single-target">
+  Nmap, single target
+</h3>
+<p>Recommend using environment variables to reference IP</p>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TARGET<span style="color:#5e81ac">={</span>ip<span style="color:#5e81ac">}</span></span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+
+
+<h4 id="simple-port-scan-top-1000-one-target">
+  Simple port scan (top 1000), one target:
+</h4>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmap -sC -sV $TARGET</span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+
+
+<h4 id="full-port-scan-one-target">
+  Full port scan, one target:
+</h4>
+<p>Find all open ports</p>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmap -p- --min-rate <span style="color:#b48ead">2000</span> $TARGET</span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+<p>Then, service scan just the open ports:</p>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmap -sC -sV -p &lt;port1&gt;,&lt;port2&gt;,&lt;etc&gt; $TARGET</span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+
+
+<h3 id="nmap-multiple-targets">
+  Nmap, multiple targets
+</h3>
+<p>Recommend using targets.txt file, one IP per line</p>
+
+
+<h4 id="simple-port-scan-top-1000-many-targets">
+  Simple port scan (top 1000), many targets:
+</h4>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nmap -sC -sV -iL targets.txt --min-rate <span style="color:#b48ead">2000</span></span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+
+
+<h3 id="saving-output-to-file">
+  Saving output to file
+</h3>
+<p>For a simple, readable file that you can easily <code>cat</code>:</p>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>-oN results.nmap</span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+<p>For all file formats:</p>
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper"><div class="highlight"><pre tabindex="0" style="color:#bbc3d4;background-color:#242933;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>-oA scans/&lt;scan-name&gt;</span></span></code></pre></div><button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>
+
+
+<h3 id="extra-info">
+  Extra info
+</h3>
+<ul>
+<li>Sometimes hosts appear down when they actually are not because firewalls are blocking ICMP traffic. Adding <code>-Pn</code> flag treats hosts as online</li>
+<li>The <code>-sU</code> flag can be used to perform UDP scans</li>
+</ul>
+<hr>
+
+
+<h3 id="found-nothing">
+  Found Nothing
+</h3>
+<p>If all standard TCP ports look locked down or empty:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Verify the full <code>-p-</code> TCP scan finished completely</li>
+<li><input disabled="" type="checkbox"> Check the UDP scan output (<code>nmap-udp.txt</code>)</li>
+<li><input disabled="" type="checkbox"> Check for virtual host routing on HTTP (<code>ffuf</code> Host header fuzzing) -&gt; <a href="scenarios/no-foothold.md">Scenario: Stuck on Initial Foothold</a></li>
+</ul>
+
+   <div class="time">
+     <time datetime="2026-11-13">2026-11-13&nbsp;</time>
+
+     
+     
+       <span class="reading-time"> · 1 min read</span>
+     
+     
+     
+   </div>
+
+  
+  
+    <div class="comments">
+
+</div>
+  
+
+  
+    <div class="terminal-nav">
+      <div class="back-nav">
+        
+          <a href="/posts/" class="back-link">../</a>
+        
+      </div>
+    </div>
+  
+</main>
+    <footer role="contentinfo"><p role="contentinfo">
+  &copy; Copyright 2026 &middot;
+  <a href="https://github.com/ntk148v/shibui">shibui</a>
+</p>
+</footer>
+  </body>
+</html>

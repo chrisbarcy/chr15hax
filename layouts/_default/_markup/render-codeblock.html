@@ -1,0 +1,54 @@
+<style>
+  .code-wrapper {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    background: #272822;
+    color: #a6a6a6;
+    border: 1px solid #444;
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .code-wrapper:hover .copy-btn,
+  .copy-btn:focus {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    color: #f8f8f2;
+    border-color: #888;
+  }
+  .copy-btn.copied {
+    opacity: 1;
+    color: #a6e22e;
+    border-color: #a6e22e;
+  }
+</style>
+
+<div class="code-wrapper">
+  {{- highlight .Inner .Type .Options -}}
+  <button
+    type="button"
+    class="copy-btn"
+    aria-label="Copy code"
+    onclick="
+      const code = this.previousElementSibling.innerText.trim();
+      navigator.clipboard.writeText(code);
+      this.innerText = 'copied';
+      this.classList.add('copied');
+      setTimeout(() => {
+        this.innerText = 'copy';
+        this.classList.remove('copied');
+      }, 1500);
+    "
+  >copy</button>
+</div>

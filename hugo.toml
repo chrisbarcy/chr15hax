@@ -1,0 +1,22 @@
+baseURL = 'http://example.org/'
+locale = 'en-us'
+title = 'chr15hax'
+theme = "shibui"
+
+[params.author]
+  name = "Chris"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+[markup]
+  [markup.highlight]
+    style = "nordic"
+    noClasses = true
