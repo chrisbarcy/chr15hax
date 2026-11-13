@@ -1,6 +1,6 @@
 ---
 date: '2026-11-13T08:03:27-08:00'
-draft: true
+draft: false
 title: 'Initial Enumeration'
 ---
 
